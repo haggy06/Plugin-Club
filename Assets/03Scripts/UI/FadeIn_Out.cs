@@ -18,21 +18,27 @@ public class FadeIn_Out : Singleton<FadeIn_Out>
     [SerializeField]
     private Image fadeImage;
     
-    private void Start()
+    private void Awake()
     {
+        base.Singletoning();
         StartCoroutine("FadeOut");
     }
     private void OnLevelWasLoaded(int level)
     {
         Debug.Log(level);
-        StartCoroutine("FadeOut");
+        if (level != (int)SceneName.LoadingScene)
+        {
+            StartCoroutine("FadeOut");
+        }
     }
     #region Fade Coroutines
     private Color alpha;
     private float currentTime, percent;
     private IEnumerator FadeOut()
     {
+        Debug.Log("Fadeout");
         alpha = fadeImage.color;
+
         currentTime = 0f;
         percent = 0f;
 
@@ -51,8 +57,9 @@ public class FadeIn_Out : Singleton<FadeIn_Out>
     }
     public IEnumerator FadeIn(string nextSceneName)
     {
-        Debug.Log("페이드 실행");
+        Debug.Log("Fadein");
         alpha = fadeImage.color;
+
         currentTime = 0f;
         percent = 0f;
 
@@ -68,7 +75,7 @@ public class FadeIn_Out : Singleton<FadeIn_Out>
             yield return null;
         }
 
-        
+        PlayerPrefs.SetString(TempData.LoadSceneName.ToString(), nextSceneName);
         SceneManager.LoadScene(SceneName.LoadingScene.ToString());
     }
     #endregion

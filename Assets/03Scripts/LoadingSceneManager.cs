@@ -1,14 +1,29 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.SceneManagement;
-
 public class LoadingSceneManager : MonoBehaviour
 {
-    //AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(PlayerPrefs.GetString(SceneName.ToString()));
     private void Awake()
     {
-        //asyncScene.allowSceneActivation = true; // AriDiBuJiTos
+        Debug.Log("·Îµù ¾À ÁøÀÔ");
+        StartCoroutine("LoadSceneAsync");
+        //Invoke("LoadNextScene", 1f);
+    }
+
+    private IEnumerator LoadSceneAsync()
+    {
+        yield return YieldInstructionCache.WaitForSeconds(0.1f);
+
+        AsyncOperation asyncScene = SceneManager.LoadSceneAsync(PlayerPrefs.GetString(TempData.LoadSceneName.ToString()));
+        asyncScene.allowSceneActivation = false;
+
+        yield return YieldInstructionCache.WaitForSeconds(1f);
+        asyncScene.allowSceneActivation = true;
+    }
+
+    private void LoadNextScene()
+    {
+        SceneManager.LoadScene(PlayerPrefs.GetString(TempData.LoadSceneName.ToString()));
     }
 }

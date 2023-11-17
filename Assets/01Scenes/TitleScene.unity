@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19443d25573d11c478ba5c2c3863d361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeIn_OutTime: 2
+  fadeIn_OutTime: 1
   fadeImage: {fileID: 908894812}
 --- !u!4 &173722331 stripped
 Transform:
@@ -440,7 +440,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Intro
+          m_StringArgument: IntroScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &208931852

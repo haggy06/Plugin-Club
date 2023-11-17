@@ -8,21 +8,10 @@ public class GameDataManager : Singleton<GameDataManager>
     private GameData gameData;
     public GameData DATA => gameData;
 
-    //public static GameDataManager gameDataManager; 
-    /*
     private void Awake()
     {
-        if (gameDataManager != null)
-        {
-            Debug.LogWarning("한 하늘 아래 2개 이상의 GameDataManger가 존재할 수 없습니다.");
-            Destroy(this);
-        }
-        else
-        {
-            gameDataManager = this;
-            DontDestroyOnLoad(this);
-        }
-    }*/
+        base.Singletoning();
+    }
 }
 
 [System.Serializable]

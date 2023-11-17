@@ -22,7 +22,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
-    private void Awake()
+    public void Singletoning()
     {
         if (transform.parent != null && transform.root != null) // 이 오브젝트에 부모 오브젝트가 존재하는 경우
         {
