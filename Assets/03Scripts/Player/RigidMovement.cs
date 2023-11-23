@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(GroundTypeChecker))] // GroundTypeChecker 가 없을 경우 플레이 전 추가해 주는 함수
 public class RigidMovement : MonoBehaviour
 {
     #region Imported Things
     private GroundTypeChecker typeChecker;
+
+    private SpriteRenderer sprite;
+    private Animator anim;
     #endregion
 
     #region Simple Settings
@@ -66,6 +70,12 @@ public class RigidMovement : MonoBehaviour
     #endregion
 
     [Space(10)]
+
+    [SerializeField]
+    private bool isMove = false;
+    #region moveSpeed 캡슐화
+    public bool IsMove { get => isMove; }
+    #endregion
 
     [SerializeField]
     private float moveSpeed = 7f;
@@ -138,6 +148,21 @@ public class RigidMovement : MonoBehaviour
     private void Awake()
     {
         typeChecker = GetComponent<GroundTypeChecker>();
+
+        GameObject obj = transform.parent.gameObject;
+        if (obj == null)
+        {
+            Debug.LogError("RIgidMovement가 자식으로 들어있지 않습니다 : " + gameObject.name);
+        }
+        else
+        {
+            sprite = obj.GetComponent<SpriteRenderer>();
+            
+            if (!obj.TryGetComponent<Animator>(out anim))
+            {
+                Debug.Log("RigidMovement.cs - Awake() - anim 참조 실패. " + obj.name + "에 Animator가 있는지 확인해 주십시오.");
+            }
+        }
     }
     
     private void FixedUpdate()
@@ -205,6 +230,7 @@ public class RigidMovement : MonoBehaviour
             terminalVelocity = commonGroundPhysics[3]; // 지상의 종단속도로 변경
         }
         #endregion
+        
     }
 
     #region Move Type Converting
@@ -228,6 +254,9 @@ public class RigidMovement : MonoBehaviour
     private float fixedCycle = 0.02f; // 기본적으로 FixedUpdate는 0.02초에 한 번 실행됨
     public void LeftMove()
     {
+        sprite.flipX = true;
+        isMove = true;
+
         if (rigid2D.velocity.x >= -moveSpeed * (moveSpeedRatio / 100))
         {
             xMoveVec.x = Mathf.Clamp(rigid2D.velocity.x - (moveSpeed / boostLeadTime * fixedCycle), -moveSpeed * (moveSpeedRatio / 100), float.PositiveInfinity);
@@ -242,6 +271,9 @@ public class RigidMovement : MonoBehaviour
     }
     public void RightMove()
     {
+        sprite.flipX = false;
+        isMove = true;
+
         if (rigid2D.velocity.x <= moveSpeed * (moveSpeedRatio / 100))
         {
             xMoveVec.x = Mathf.Clamp(rigid2D.velocity.x + (moveSpeed / boostLeadTime * fixedCycle), float.NegativeInfinity, moveSpeed * (moveSpeedRatio / 100));
@@ -256,6 +288,9 @@ public class RigidMovement : MonoBehaviour
     }
     public void Break()
     {
+        isMove = false;
+        anim.SetBool("IsWalk", false);
+
         if (Mathf.Abs(rigid2D.velocity.x) <= 0.5f)
         {
             xMoveVec.x = 0f;
@@ -275,6 +310,8 @@ public class RigidMovement : MonoBehaviour
     private Vector2 yMoveVec;
     public void Jump(float rate) // rate : 점프파워 배율
     {
+        anim.SetTrigger("Jump");
+
         yMoveVec.x = rigid2D.velocity.x;
         yMoveVec.y = jumpPower * rate;
 
@@ -306,21 +343,44 @@ public class RigidMovement : MonoBehaviour
         }
     }
 
-    private void LateUpdate() // 종단속도 구현
+    private void LateUpdate()
     {
-        if (rigid2D.velocity.y < terminalVelocity)
+        if (isMove) // 움직이고 있을 경우
         {
-            yMoveVec.x = rigid2D.velocity.x;
-            yMoveVec.y = terminalVelocity;
+            if (Mathf.Approximately(rigid2D.velocity.x, 0))
+            {
+                anim.SetBool("IsWalk", false);
+            }
+            else
+            {
+                anim.SetBool("IsWalk", true);
+            }
+        }
 
-            rigid2D.velocity = yMoveVec;
+        if (!grounded) // 공중에 있을 경우
+        {
+            if (rigid2D.velocity.y < 0)
+            {
+                anim.SetBool("IsFalling", true);
+
+                if (rigid2D.velocity.y < terminalVelocity) // 종단속도 구현
+                {
+                    yMoveVec.x = rigid2D.velocity.x;
+                    yMoveVec.y = terminalVelocity;
+
+                    rigid2D.velocity = yMoveVec;
+                }
+            }
+        }
+        else
+        {
+            anim.SetBool("IsFalling", false);
         }
     }
 
-    private WaitForSeconds diveTime = new WaitForSeconds(0.1f);
     private IEnumerator Dive()
     {
-        yield return diveTime;
+        yield return YieldInstructionCache.WaitForSeconds(0.1f);
 
         if (typeChecker.IsInWater)
         {
