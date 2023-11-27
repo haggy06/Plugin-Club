@@ -311,11 +311,17 @@ public class RigidMovement : MonoBehaviour
     public void Jump(float rate) // rate : 점프파워 배율
     {
         anim.SetTrigger("Jump");
-
         yMoveVec.x = rigid2D.velocity.x;
         yMoveVec.y = jumpPower * rate;
 
         rigid2D.velocity = yMoveVec;
+        
+        /*
+        xMoveVec.x = 0;
+        yMoveVec.y = jumpPower * rate;
+
+        rigid2D.AddForce(yMoveVec, ForceMode2D.Force)
+        */
     }
     public void JumpCancle()
     {
