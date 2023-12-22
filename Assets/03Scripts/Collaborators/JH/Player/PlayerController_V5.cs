@@ -8,18 +8,43 @@ public class PlayerController_V5 : MonoBehaviour
     private RigidMovement movement;
     private GroundTypeChecker checker;
 
+    private SpriteRenderer sprite;
     private Rigidbody2D rigid2D;
+    private Animator anim;
     #endregion
+
+    [SerializeField]
+    private GameObject bulletPrefab;
+    [SerializeField]
+    private float bulletSpeed = 15f;
+    [SerializeField]
+    private float bulletDamage = 5f;
 
     private bool isJump = false;
     private bool jumpReady = false;
 
+    private Stack<GameObject> bulletStack = new Stack<GameObject>();
+    public void ReturnBullet(GameObject returnedBullet)
+    {
+        returnedBullet.SetActive(false);
+        bulletStack.Push(returnedBullet);
+    }
+
+    private GameObject obj;
     private void Awake()
     {
-        movement = gameObject.GetComponentInChildren<RigidMovement>();
-        checker = gameObject.GetComponentInChildren<GroundTypeChecker>();
+        movement = GetComponentInChildren<RigidMovement>();
+        checker = GetComponentInChildren<GroundTypeChecker>();
 
-        rigid2D = gameObject.GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
+        rigid2D = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+
+        for (int i = 0; i < 20; i++)
+        {
+            bulletStack.Push(obj = Instantiate(bulletPrefab, transform));
+            obj.SetActive(false);
+        }
     }
 
     /*
@@ -93,6 +118,23 @@ public class PlayerController_V5 : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            anim.SetTrigger("Attack");
+
+            if (bulletStack.TryPop(out obj))
+            {
+                obj.SetActive(true);
+
+                obj.transform.position = transform.position;
+                obj.GetComponent<PlayerBullet>().InitInfo(sprite.flipX ? Vector2.left : Vector2.right, bulletSpeed, bulletDamage);
+            }
+            else
+            {
+                Debug.Log("ÃÑ¾Ë ¾øÀ½");
+            }
+        }
+
         if (jumpReady)
         {
             movement.Jump(1f);
@@ -103,10 +145,9 @@ public class PlayerController_V5 : MonoBehaviour
         }
     }
 
-    private WaitForSeconds wfs = new WaitForSeconds(0.25f);
     private IEnumerator Jumping()
     {
-        yield return wfs;
+        yield return YieldInstructionCache.WaitForSeconds(0.25f);
 
         jumpReady = false;
     }

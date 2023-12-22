@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4905334241054328669}
   - component: {fileID: 4905334241054328671}
   - component: {fileID: 4905334241054328609}
+  - component: {fileID: 77902918}
   m_Layer: 0
   m_Name: Player_Version 5
   m_TagString: Untagged
@@ -76,9 +77,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_SortingOrder: -1
+  m_Sprite: {fileID: -1676272951, guid: 8d5fb109f7d2f35459bdd76eb7a50ada, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -101,19 +102,19 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.05, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.85, y: 1.6}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.4225, y: 1.475}
+  m_EdgeRadius: 0.05
 --- !u!50 &4905334241054328671
 Rigidbody2D:
   serializedVersion: 4
@@ -130,7 +131,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 3
-  m_Material: {fileID: 6200000, guid: a33c284d560d6ff40b9917cae989d161, type: 2}
+  m_Material: {fileID: 6200000, guid: c35647e5131a72649a0373da4924af36, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -147,6 +148,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a0138d373808045bf3e4cafd1b6f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &77902918
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4905334241054328666}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7f501a5892e17b045a4697410381f51a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4905334241583119945
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +216,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.475}
+  m_Offset: {x: 0.05, y: -0.7775}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -205,7 +227,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.1}
+  m_Size: {x: 0.45, y: 0.05}
   m_EdgeRadius: 0
 --- !u!114 &4905334241583119949
 MonoBehaviour:
@@ -219,12 +241,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 564deb11c6b03944a94a6a2d0cfed544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentMoveType: 
+  currentMoveType: 0
   isGrounded: 0
   isInWater: 0
-  statusChanged: 0
-  groundOut: 0
-  waterOut: 0
+  waterProof: 0
 --- !u!114 &4905334241583119951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,16 +259,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigid2D: {fileID: 4905334241054328671}
   autoWaterOut: 1
-  in_DecreaseRate: 100
+  moveStatus: 48
+  watered: 0
+  grounded: 0
+  moveSpeedRatio: 100
+  jumpPowerRatio: 100
   boostLeadTime: 0.1
   friction: 1
-  moveSpeed: 7
-  jumpPower: 16
+  isMove: 0
+  moveSpeed: 5
+  jumpPower: 10
   jumpCanclePower: 5
   terminalVelocity: -15
   commonGroundPhysics:
-  - 7
-  - 16
+  - 5
+  - 10
   - 5
   - -15
   - 3
