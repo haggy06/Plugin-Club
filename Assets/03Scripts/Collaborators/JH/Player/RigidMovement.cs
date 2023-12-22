@@ -202,7 +202,7 @@ public class RigidMovement : MonoBehaviour
 
                 switch (moveStatus)
                 {
-                    case 'U':
+                    case 'G':
                         FrictionChange(normalGround);
                         break;
 

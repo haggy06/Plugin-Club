@@ -31,6 +31,11 @@ public class PlantBullet_Remake : MonoBehaviour
             StopAllCoroutines(); // 자동삭제 코루틴 중지
             DestroyBullet();
         }
+        else if(collision.CompareTag("Ground"))
+        {
+            StopAllCoroutines(); // 자동삭제 코루틴 중지
+            DestroyBullet();
+        }
     }
 
     private void DestroyBullet()
