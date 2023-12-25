@@ -9,7 +9,7 @@ public class Egg : MonoBehaviour
     CapsuleCollider2D capsule;
     SpriteRenderer spriteRenderer;
     public float HP;
-    GameObject target;
+    Transform target;
     public float speed;
     bool a;
 
@@ -17,7 +17,7 @@ public class Egg : MonoBehaviour
     {
         capsule = GetComponent<CapsuleCollider2D>();
         rigid = GetComponent<Rigidbody2D>();
-        target = GameObject.FindWithTag("Player");
+        target = GameObject.FindWithTag("Player").transform;
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
         speed = 10;
         HP = 5;
@@ -28,10 +28,13 @@ public class Egg : MonoBehaviour
     {
         if (a)
         {
-        Vector2 dircV = target.transform.position - this.transform.position;
-        Vector2 NextV = dircV.normalized * speed * Time.fixedDeltaTime;
-        transform.Translate(NextV);
-        rigid.velocity = Vector2.zero;
+            Vector3 direction = target.position - transform.position;
+            direction.Normalize();
+
+            transform.position += direction * speed * Time.deltaTime;
+
+            float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
         }
         
     }

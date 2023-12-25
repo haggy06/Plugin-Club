@@ -9,7 +9,7 @@ public class Udotan : MonoBehaviour
 {
     CapsuleCollider2D capsule;
     Rigidbody2D rigid;
-    GameObject target;
+    Transform target;
     SpriteRenderer spriter;
     public float speed;
     bool isLive;
@@ -28,17 +28,20 @@ public class Udotan : MonoBehaviour
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
-        target = GameObject.FindWithTag("Player");
+        target = GameObject.FindWithTag("Player").transform;
         capsule = GetComponent<CapsuleCollider2D>();
         speed = UnityEngine.Random.Range(2f, 8f);
     }
     void FixedUpdate()
     {
-        
-        Vector2 dircV = target.transform.position - this.transform.position;
-        Vector2 NextV = dircV.normalized * speed * Time.fixedDeltaTime;
-        transform.Translate(NextV);
-        rigid.velocity = Vector2.zero;
+
+        Vector3 direction = target.position - transform.position;
+        direction.Normalize();
+
+        transform.position += direction * speed * Time.deltaTime;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
     }
 
         public void OnCollisionEnter2D(Collision2D collision)
