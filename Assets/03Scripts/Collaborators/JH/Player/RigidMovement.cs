@@ -8,7 +8,7 @@ public class RigidMovement : MonoBehaviour
     #region Imported Things
     private GroundTypeChecker typeChecker;
 
-    private SpriteRenderer sprite;
+    //private SpriteRenderer sprite;
     private Animator anim;
     #endregion
 
@@ -156,7 +156,7 @@ public class RigidMovement : MonoBehaviour
         }
         else
         {
-            sprite = obj.GetComponent<SpriteRenderer>();
+            //sprite = obj.GetComponent<SpriteRenderer>();
             
             if (!obj.TryGetComponent<Animator>(out anim))
             {
@@ -254,7 +254,7 @@ public class RigidMovement : MonoBehaviour
     private float fixedCycle = 0.02f; // 기본적으로 FixedUpdate는 0.02초에 한 번 실행됨
     public void LeftMove()
     {
-        sprite.flipX = true;
+        transform.parent.rotation = Quaternion.Euler(0f, 180f, 0f);
         isMove = true;
 
         if (rigid2D.velocity.x >= -moveSpeed * (moveSpeedRatio / 100))
@@ -271,7 +271,7 @@ public class RigidMovement : MonoBehaviour
     }
     public void RightMove()
     {
-        sprite.flipX = false;
+        transform.parent.rotation = Quaternion.Euler(0f, 0f, 0f);
         isMove = true;
 
         if (rigid2D.velocity.x <= moveSpeed * (moveSpeedRatio / 100))

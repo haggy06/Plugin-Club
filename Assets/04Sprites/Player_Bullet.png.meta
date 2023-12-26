@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8d5fb109f7d2f35459bdd76eb7a50ada
+guid: c5f65e5e0d06ee44f816f3e6686a610e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,118 +105,55 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Move_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 17
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 226a3cfb937813948937811daf169199
-      internalID: -1676272951
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_Move_1
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 32
-        width: 17
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ea9d344109df0af4b88c96f2c0398326
-      internalID: -340807219
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_Move_2
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 32
-        width: 17
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0b29ec683cdcc3f4e9bcd5c09e9865f2
-      internalID: -1510836068
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_Move_3
+      name: Player_Bullet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 17
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 103
+        height: 25
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50f5fd2ed601d8c489b8bef348bbb69d
-      internalID: 872999248
+      spriteID: 83c3fce187d422b499ed72aea46cb9ad
+      internalID: -836298321
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Move_4
+      name: Player_Bullet_1
       rect:
         serializedVersion: 2
-        x: 17
-        y: 0
-        width: 17
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 103
+        y: 21
+        width: 47
+        height: 4
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5df7a67820f26774b8308019e5ed9030
-      internalID: 126676050
+      spriteID: fc93b0e753b33834cb9533976495775d
+      internalID: 334712156
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Move_5
+      name: Player_Bullet_2
       rect:
         serializedVersion: 2
-        x: 34
-        y: 0
-        width: 17
-        height: 32
+        x: 103
+        y: 17
+        width: 4
+        height: 4
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,8 +161,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37884aa0e4a89294da2f50ab1c47311b
-      internalID: 616997257
+      spriteID: 7b86ddabb468bcf41be34bcd4430f445
+      internalID: -2107321415
       vertices: []
       indices: 
       edges: []
@@ -241,12 +178,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_Move_0: -1676272951
-      Player_Move_1: -340807219
-      Player_Move_2: -1510836068
-      Player_Move_3: 872999248
-      Player_Move_4: 126676050
-      Player_Move_5: 616997257
+      Player_Bullet_0: -836298321
+      Player_Bullet_1: 334712156
+      Player_Bullet_2: -2107321415
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
