@@ -34,7 +34,7 @@ public class Egg_Remake : EnemyBase
         }
     }
 
-    IEnumerator Movement()
+    private IEnumerator Movement()
     {
         yield return YieldInstructionCache.WaitForSeconds(1.5f);
 
