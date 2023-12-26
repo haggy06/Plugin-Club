@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 4905334241054328671}
   - component: {fileID: 4905334241054328609}
   - component: {fileID: 77902918}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player_Version 5
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,6 +148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a0138d373808045bf3e4cafd1b6f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 2323429599130045489, guid: 53dc7c56703a1914097d8fa1c043e61f, type: 3}
+  bulletSpeed: 15
+  bulletDamage: 5
 --- !u!95 &77902918
 Animator:
   serializedVersion: 5
@@ -181,7 +184,7 @@ GameObject:
   - component: {fileID: 4905334241583119948}
   - component: {fileID: 4905334241583119949}
   - component: {fileID: 4905334241583119951}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FootArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}

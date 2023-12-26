@@ -718,14 +718,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4905334241054328609, guid: 3e011eddb3a559c4a9656f7bfacde6f6, type: 3}
-      propertyPath: bulletSpeed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4905334241054328609, guid: 3e011eddb3a559c4a9656f7bfacde6f6, type: 3}
-      propertyPath: bulletPrefab
-      value: 
-      objectReference: {fileID: 2323429599130045489, guid: 53dc7c56703a1914097d8fa1c043e61f, type: 3}
     - target: {fileID: 4905334241054328665, guid: 3e011eddb3a559c4a9656f7bfacde6f6, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -773,26 +765,6 @@ PrefabInstance:
     - target: {fileID: 4905334241054328666, guid: 3e011eddb3a559c4a9656f7bfacde6f6, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4905334241054328666, guid: 3e011eddb3a559c4a9656f7bfacde6f6, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4905334241054328666, guid: 3e011eddb3a559c4a9656f7bfacde6f6, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4905334241054328668, guid: 3e011eddb3a559c4a9656f7bfacde6f6, type: 3}
-      propertyPath: m_FlipX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4905334241054328669, guid: 3e011eddb3a559c4a9656f7bfacde6f6, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4905334241583119945, guid: 3e011eddb3a559c4a9656f7bfacde6f6, type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e011eddb3a559c4a9656f7bfacde6f6, type: 3}
