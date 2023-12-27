@@ -162,10 +162,13 @@ public class PlayerController_V5 : MonoBehaviour
         Debug.Log("발사 완료");
         canMove = true;
     }
+
     public void Controll_OFF()
     {
         Debug.Log("발사 준비");
         movement.Break();
+        rigid2D.velocity = new Vector2(rigid2D.velocity.x / 2f, rigid2D.velocity.y);
+
         canMove = false;
     }
     public void BulletFire()
