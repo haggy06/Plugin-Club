@@ -19,7 +19,7 @@ public class Audio : Singleton<Audio>
     int channelIndex;
 
     //효과음 목록
-    public enum Sfx {Start,b,c,d}
+    public enum Sfx {Start,Jump1,Shoot1,Walk_G, ATK1}
 
     private new void Awake()
     {

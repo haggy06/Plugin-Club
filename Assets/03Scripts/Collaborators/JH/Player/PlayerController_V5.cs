@@ -127,7 +127,7 @@ public class PlayerController_V5 : MonoBehaviour
                 if (checker.IsGrounded)
                 {
                     jumpReady = true;
-
+                    Audio.instance.PlaySfx(Audio.Sfx.Jump1);
                     StartCoroutine("Jumping");
                 }
                 else if (movement.WaterJump)
@@ -139,7 +139,7 @@ public class PlayerController_V5 : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.X) && coolDowned)
             {
                 anim.SetTrigger("Attack");
-
+                Audio.instance.PlaySfx(Audio.Sfx.Shoot1);
                 coolDowned = false;
                 Invoke("CoolDown", fireCoolTime);
             }

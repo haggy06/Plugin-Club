@@ -21,13 +21,13 @@ public class FadeIn_Out : Singleton<FadeIn_Out>
     public void FadeImgHide()
     {
         fadeImage.color = Color.clear;
+        Audio.instance.PlayBgm(true);
     }
     
     private new void Awake()
     {
         base.Awake();
         StartCoroutine("FadeOut");
-        Audio.instance.PlayBgm(true);
     }
     private void OnLevelWasLoaded(int level)
     {
