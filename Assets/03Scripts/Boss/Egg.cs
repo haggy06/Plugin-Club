@@ -18,7 +18,7 @@ public class Egg : MonoBehaviour
     Transform target;
     public float speed = 10f;
     public Sprite feath;
-    Image p_image;
+    
     bool a;
 
     void Awake()

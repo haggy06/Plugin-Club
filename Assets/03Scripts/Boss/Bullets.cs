@@ -16,7 +16,7 @@ public class Bullets : MonoBehaviour
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
-        newPos = new Vector2(Random.Range(-8f, 8f), -3f);
+        newPos = new Vector2(UnityEngine.Random.Range(-8f, 8f), -3f);
         GetComponent<Rigidbody2D>().velocity = newPos * 2f;
         rigid.velocity = new Vector2(newPos.x, newPos.y) * 2;
         Vector2 direction = transform.forward;
