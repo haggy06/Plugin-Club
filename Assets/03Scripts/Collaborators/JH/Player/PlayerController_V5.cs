@@ -16,8 +16,6 @@ public class PlayerController_V5 : MonoBehaviour
     #endregion
 
     [SerializeField]
-    private float fireCoolTime = 0.5f;
-    [SerializeField]
     private GameObject bulletPrefab;
     [SerializeField]
     private float bulletSpeed = 15f;
@@ -31,13 +29,6 @@ public class PlayerController_V5 : MonoBehaviour
 
     private bool canMove = true;
 
-    private Stack<GameObject> bulletStack = new Stack<GameObject>();
-    public void ReturnBullet(GameObject returnedBullet)
-    {
-        returnedBullet.SetActive(false);
-        bulletStack.Push(returnedBullet);
-    }
-
     private GameObject obj;
     private void Awake()
     {
@@ -49,12 +40,6 @@ public class PlayerController_V5 : MonoBehaviour
         anim = GetComponent<Animator>();
 
         bulletPos = transform.GetChild(1);
-
-        for (int i = 0; i < 20; i++)
-        {
-            bulletStack.Push(obj = Instantiate(bulletPrefab));
-            obj.SetActive(false);
-        }
     }
 
     /*
@@ -64,9 +49,9 @@ public class PlayerController_V5 : MonoBehaviour
     private float moveDirection = 0f;
     private float lastMoveDirection = 5f;
     private void FixedUpdate()
-    {
+    {/*
         if (canMove)
-        {
+        {*/
             moveDirection = Input.GetAxisRaw("Horizontal");
 
             if (!Mathf.Approximately(lastMoveDirection, moveDirection))
@@ -85,8 +70,8 @@ public class PlayerController_V5 : MonoBehaviour
                 }
 
                 lastMoveDirection = moveDirection;
-            }
-        }
+            }/*
+        }*/
         /*
         moveDirection = Input.GetAxis("Horizontal");
         
@@ -110,6 +95,7 @@ public class PlayerController_V5 : MonoBehaviour
         movement.Break();
         lastMoveDirection = 0f;
 
+        GetComponent<PlayerHitCheck>().invincible = true;
         canMove = false;
     }
 
@@ -136,12 +122,10 @@ public class PlayerController_V5 : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.X) && coolDowned)
+            if (Input.GetKeyDown(KeyCode.X))
             {
                 anim.SetTrigger("Attack");
                 Audio.instance.PlaySfx(Audio.Sfx.Shoot1);
-                coolDowned = false;
-                Invoke("CoolDown", fireCoolTime);
             }
         }
 
@@ -181,32 +165,33 @@ public class PlayerController_V5 : MonoBehaviour
     public void Controll_OFF()
     {
         Debug.Log("발사 준비");
-        movement.Break();
-        lastMoveDirection = 0f;
-
-        //rigid2D.velocity = new Vector2(rigid2D.velocity.x / 2f, rigid2D.velocity.y);
-
         canMove = false;
     }
     public void BulletFire()
     {
         Debug.Log("발사");
-        if (bulletStack.TryPop(out obj))
-        {
-            obj.SetActive(true);
 
-            obj.transform.position = bulletPos.position;
-            obj.GetComponent<PlayerBullet>().InitInfo(Mathf.Approximately(Mathf.Abs(transform.eulerAngles.y), 180f) ? Vector2.left : Vector2.right, bulletSpeed, bulletDamage);
-        }
-        else
-        {
-            Debug.Log("총알 없음");
-        }
+        obj = Instantiate(bulletPrefab);
+
+        obj.transform.position = bulletPos.position;
+        obj.GetComponent<PlayerBullet>().InitInfo(Mathf.Approximately(Mathf.Abs(transform.eulerAngles.y), 180f) ? Vector2.left : Vector2.right, bulletSpeed, bulletDamage);
     }
     private IEnumerator Jumping()
     {
         yield return YieldInstructionCache.WaitForSeconds(0.25f);
 
         jumpReady = false;
+    }
+
+    public void PlayerDead()
+    {
+        Debug.Log("플레이어 사망");
+
+        StopAllCoroutines();
+
+        sprite.color = Color.red;
+        transform.Rotate(new Vector3(0f, 0f, 90f));
+        GetComponent<PlayerHitCheck>().enabled = false;
+        enabled = false;
     }
 }

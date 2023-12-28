@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8941989547370224008}
   m_Layer: 7
   m_Name: TrackingFeather_Remake
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,5 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32d7f860934393499003dc74127aadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 7
+  hp: 10
+  damage: 5
   speed: 10
-  autoDestroyTime: 3

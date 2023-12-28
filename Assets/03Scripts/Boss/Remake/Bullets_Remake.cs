@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullets_Remake : MonoBehaviour
+public class Bullets_Remake : EnemyBase
 {
     [SerializeField]
     private float bulletSpeed = 5f;
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();
+
         transform.eulerAngles = new Vector3(0, 0, Random.Range(120f, 240f));
 
         StartCoroutine("Movement");

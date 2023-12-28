@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpEnemyAttacker_Remake : MonoBehaviour
+public class JumpEnemyAttacker_Remake : EnemyBase
 {
     [Header("For petrolling")]
     [SerializeField] float moveSpeed;
@@ -20,7 +20,7 @@ public class JumpEnemyAttacker_Remake : MonoBehaviour
     [SerializeField] Transform Player;
     [SerializeField] Transform groundCheck;
     [SerializeField] Vector2 boxSize; // (사각형모양)
-    private bool isGrounded;
+
 
     [Header("For SeeingPlayer")] // 플레이어 볼 때
     [SerializeField] Vector2 lineOfSite;
@@ -29,27 +29,78 @@ public class JumpEnemyAttacker_Remake : MonoBehaviour
 
     [Header("other")]
     private Rigidbody2D enemyRB;
-    // private Animator (이름); //애니메이션 넣을 때 하기 !! - 만약 애니메이션을 넣는 더 좋은 방법을 아신다면, 그것을 따르세요.
+    private Animator anim; //애니메이션 넣을 때 하기 !! - 만약 애니메이션을 넣는 더 좋은 방법을 아신다면, 그것을 따르세요.
 
     void Start()
     {
         enemyRB = GetComponent<Rigidbody2D>();
-        //(이름) = GetComponent<Animator>(); //애니메이션!!
+        anim = GetComponent<Animator>(); //애니메이션!!
 
     }
 
+    [Space(15), SerializeField]
+    private bool isGrounded;
+    [SerializeField]
+    private bool lastGroundedStatus = true;
+    private bool isAttacking = false;
     void FixedUpdate() //패트롤을 위해 필요
     {
         checkingGround = Physics2D.OverlapCircle(groundCheckPoint.position, circleRadius, groundLayer);  //땅
         checkingWall = Physics2D.OverlapCircle(wallCheckPoint.position, circleRadius, groundLayer);  // 벽
         isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer); //점프공격
         canSeePlayer = Physics2D.OverlapBox(transform.position, lineOfSite, 0, PlayerLayer); //플레이어 볼 때
-                                                                                             // AnimationController(); // 애니메이션!!
+
+        if (lastGroundedStatus != isGrounded)
+        {
+            lastGroundedStatus = !lastGroundedStatus;
+
+            anim.SetBool("IsGrounded", isGrounded);
+        }
+
         if (!canSeePlayer && isGrounded) //플레이어 안 볼 때
         {
             Petrolling();
         }
+        else if (canSeePlayer)
+        {
+            FlipTowardsPlayer();
+
+            if (isGrounded && !isAttacking)
+            {
+                Debug.Log(canSeePlayer);
+
+                anim.SetTrigger("Attack");
+            }
+        }
     }
+
+    private float increasedDamage;
+    public void Falling()
+    {
+        Debug.Log("대미지 업");
+        increasedDamage++;
+        damage++;
+    }
+    public void Landing()
+    {
+
+        Debug.Log("대미지 초기화");
+
+        damage -= increasedDamage;
+
+        increasedDamage = 0f;
+    }
+
+
+    public void AttackStart()
+    {
+        isAttacking = true;
+    }
+    public void AttackStop()
+    {
+        isAttacking = false;
+    }
+
 
     void Petrolling() //패트롤하는 슬라임
     {
@@ -67,7 +118,7 @@ public class JumpEnemyAttacker_Remake : MonoBehaviour
         enemyRB.velocity = new Vector2(moveSpeed * moveDirection, enemyRB.velocity.y);
     }
 
-    void JumpAttack() //점프공격하는 슬라임
+    public void JumpAttack() //점프공격하는 슬라임
     {
         float distanceFromPlayer = Player.position.x - transform.position.x;
 
@@ -93,17 +144,13 @@ public class JumpEnemyAttacker_Remake : MonoBehaviour
 
     void Flip() // 고개돌리는 슬라임
     {
+        Debug.Log("Flip");
+
         moveDirection *= -1;
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0); //Rotation Y가 180 -> 고개 반대로 돌아감
     }
-
-    /*void AnimationController() // 애니메이션!!
-    {
-        (이름).SetBool("canSeePlayer", canSeePlayer);
-        (이름).SetBool("isGrounded", isGrounded);
-    }*/
-
+    
     private void OnDrawGizmosSelected() //(Gizmos)기즈모 설정
     {
         Gizmos.color = Color.blue;

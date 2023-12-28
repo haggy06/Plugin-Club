@@ -5,7 +5,12 @@ using UnityEngine;
 public class EnemyBase : MonoBehaviour
 {
     [SerializeField]
+    private float score = 5f;
+    [SerializeField]
     protected float hp = 20f;
+    [SerializeField]
+    protected float damage = 1f;
+    public float Damage => damage;
 
     protected SpriteRenderer sprite;
     protected void Awake()
@@ -23,8 +28,15 @@ public class EnemyBase : MonoBehaviour
         {
             Debug.Log(gameObject.name + " »ç¸Á");
 
-            Destroy(gameObject);
+            GameManager.Inst.GetScored(score);
+
+            EnemyDead();
         }
+    }
+
+    protected virtual void EnemyDead()
+    {
+        Destroy(gameObject);
     }
 
     protected IEnumerator DamageAnim()

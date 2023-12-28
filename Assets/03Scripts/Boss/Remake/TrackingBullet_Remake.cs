@@ -2,15 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrackingBullet_Remake : MonoBehaviour
+public class TrackingBullet_Remake : EnemyBase
 {
     private Transform target;
     
     public float speed = 10f;
-    public float autoDestroyTime = 3f;
+    private float autoDestroyTime = 3f;
+    public float AutoDestroyTime 
+    { 
+        set 
+        { 
+            autoDestroyTime = value;
+            StopCoroutine("AutoDestroy");
+            StartCoroutine("AutoDestroy");
+        }
+    }
 
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();
+
         target = GameObject.FindWithTag("Player").transform;
 
         speed = UnityEngine.Random.Range(2f, 8f);

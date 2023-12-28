@@ -11,11 +11,12 @@ GameObject:
   - component: {fileID: 25201236607066321}
   - component: {fileID: 25201236607066334}
   - component: {fileID: 25201236607066335}
+  - component: {fileID: 5487755446978237288}
   - component: {fileID: 25201236607066332}
-  - component: {fileID: 4414353391768451100}
+  - component: {fileID: 4423581802791144244}
   m_Layer: 7
   m_Name: Egg_Remake
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,6 +109,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 5
+--- !u!70 &5487755446978237288
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25201236607066333}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.225}
+  m_Size: {x: 0.85, y: 1.5}
+  m_Direction: 0
 --- !u!70 &25201236607066332
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -121,10 +138,10 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.225}
-  m_Size: {x: 0.85, y: 1.5}
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.85, y: 1.05}
   m_Direction: 0
---- !u!114 &4414353391768451100
+--- !u!114 &4423581802791144244
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,9 +150,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 25201236607066333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4580c2954f543241b8f3479141f5e59, type: 3}
+  m_Script: {fileID: 11500000, guid: e8d5f1529e0406f4a9f8b1842990b8de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 25
-  spawningObj: {fileID: 6533650788943620898, guid: 3701224ddcce4f24abe726a006c6a619, type: 3}
-  speed: 7.5
+  hp: 20
+  damage: 0
+  spawnObj: {fileID: 6533650788943620898, guid: 3701224ddcce4f24abe726a006c6a619, type: 3}
+  spawnObjSpeed: 10
+  spawnObjLifeTime: 1.5

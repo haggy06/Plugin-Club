@@ -12,11 +12,9 @@ public class PlayerBullet : MonoBehaviour
     private float damage;
 
     private Rigidbody2D rigid2D;
-    private PlayerController_V5 player;
     private void Awake()
     {
         rigid2D = GetComponent<Rigidbody2D>();
-        player = GameObject.Find("Player_Version 5").GetComponent<PlayerController_V5>();
     }
 
     private void OnEnable()
@@ -57,7 +55,7 @@ public class PlayerBullet : MonoBehaviour
     {
         StopAllCoroutines();
 
-        player.ReturnBullet(gameObject);
+        Destroy(gameObject);
     }
     private IEnumerator AutoDestroy()
     {
