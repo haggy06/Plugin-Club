@@ -7,6 +7,7 @@ public class BossMove_Remake : EnemyBase
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator animator;
+    Collider2D col;
 
     private Transform target;
 
@@ -33,13 +34,13 @@ public class BossMove_Remake : EnemyBase
     {
         base.Awake();
 
+        col = GetComponent<Collider2D>();
+        col.enabled = false;
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
 
         target = GameObject.FindWithTag("Player").transform;
-
-        NextmoveChange();
 
         Invoke("Ready", 3);
     }
@@ -60,6 +61,9 @@ public class BossMove_Remake : EnemyBase
     void Ready()
     {
         animator.SetBool("Emergence", true);
+
+        col.enabled = true;
+        transform.position = new Vector2(0f, 5f);
 
         Invoke("Think", 1);
     }
@@ -93,7 +97,7 @@ public class BossMove_Remake : EnemyBase
             bullet = Instantiate(feather, transform.position, Quaternion.Euler(0, 0, 0));
         }
 
-        Invoke("Think", Random.Range(3f, 4f));
+        Invoke("Think", Random.Range(2f, 3f));
     }
 
     void Ptrn2()
@@ -103,7 +107,7 @@ public class BossMove_Remake : EnemyBase
             GameObject bullet = Instantiate(egg, transform.position, Quaternion.Euler(0, 0, 0));
         }
 
-        Invoke("Think", Random.Range(3f, 4f));
+        Invoke("Think", Random.Range(2f, 3f));
     }
 
     void Ptrn3()
@@ -113,7 +117,7 @@ public class BossMove_Remake : EnemyBase
             GameObject bullet = Instantiate(trackingFeather, transform.position, Quaternion.Euler(0, 0, 0));
         }
 
-        Invoke("Think", Random.Range(3f, 4f));
+        Invoke("Think", Random.Range(2f, 3f));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

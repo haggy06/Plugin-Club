@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0ffe8da3a41b10d40ae8574654bb3f0e
+guid: 419eec27146af304bb586cdf0726058f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,64 +117,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 1_0
+      name: Background_V_1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 360
-        width: 329
-        height: 360
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 357, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f23f7e11c5d53754199a8eb91e222930
-      internalID: -206075685
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 1_1
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 360
-        width: 329
-        height: 360
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 88f65b285d36af043869b540197828aa
-      internalID: -914485821
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 1_2
-      rect:
-        serializedVersion: 2
-        x: 0
+        x: 2
         y: 0
-        width: 329
-        height: 360
+        width: 638
+        height: 533
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42c4cbbe9e7dd754e8195d67afc32f70
-      internalID: 794736209
+      spriteID: dede36524c4edc647ab7f33feed7a20d
+      internalID: 1703709336
       vertices: []
       indices: 
       edges: []
@@ -190,9 +148,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      1_0: -206075685
-      1_1: -914485821
-      1_2: 794736209
+      Background_V_1_0: 1703709336
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

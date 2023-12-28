@@ -5,6 +5,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+public enum GameResult
+{
+    Gameover,
+    Clear,
+
+}
+
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField]
@@ -15,8 +22,8 @@ public class GameManager : Singleton<GameManager>
     private float playerCurScore = 0f;
     public float PlayerScore => playerCurScore;
 
-    private string gameResult = "None";
-    public string GameResult => gameResult;
+    private GameResult gameResult;
+    public GameResult GameResult => gameResult;
 
     private new void Awake()
     {
@@ -70,11 +77,15 @@ public class GameManager : Singleton<GameManager>
 
         if (playerCurHP <= 0f)
         {
-            hpText.text = gameResult = "Game Over";
+            gameResult = GameResult.Gameover;
+            hpText.text = "Game Over";
 
             GameObject.FindWithTag("Player").GetComponent<PlayerController_V5>().PlayerDead();
 
-            gameEndPopup.SetActive(true);
+            //gameEndPopup.SetActive(true);
+
+            StartCoroutine(FadeIn_Out.Inst.FadeIn("CompleteScene"));
+            FadeIn_Out.Inst.FadeTime = 1f;
         }
         else
         {
@@ -86,18 +97,20 @@ public class GameManager : Singleton<GameManager>
     {
         if (playerCurHP >= playerMaxHP)
         {
-            gameResult = "Perfect!!!";
             playerCurScore += 150f;
             scoreText.text = playerCurScore.ToString();
         }
         else
         {
-            gameResult = "Game Clear";
+            gameResult = GameResult.Clear;
         }
-
+        /*
         gameEndPopup.SetActive(true);
-
+        */
         GameObject.FindWithTag("Player").GetComponent<PlayerController_V5>().Clear();
+
+        StartCoroutine(FadeIn_Out.Inst.FadeIn("CompleteScene"));
+        FadeIn_Out.Inst.FadeTime = 1f;
     }
 
     public void GetScored(float score)

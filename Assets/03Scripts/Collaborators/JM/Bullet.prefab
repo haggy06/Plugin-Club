@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed668555d69ed25438077a7e8f999563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0.1
+  score: 0
   hp: 1
   damage: 2
   speed: 5

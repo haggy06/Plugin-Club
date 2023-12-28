@@ -7,6 +7,6 @@ public class GetGameResult : MonoBehaviour
 {
     private void OnEnable()
     {
-        GetComponent<TextMeshProUGUI>().text = GameManager.Inst.GameResult;
+        GetComponent<TextMeshProUGUI>().text = GameManager.Inst.GameResult.ToString();
     }
 }

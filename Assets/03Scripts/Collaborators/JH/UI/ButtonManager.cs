@@ -8,8 +8,6 @@ public class ButtonManager : MonoBehaviour
 {
     public void SceneMove(string sceneName)
     {
-        Audio.Inst.PlaySfx(Audio.Sfx.Start);
-
         StartCoroutine(FadeIn_Out.Inst.FadeIn(sceneName));
         FadeIn_Out.Inst.FadeTime = 1f;
         Audio.Inst.PlaySfx(Audio.Sfx.Start);
