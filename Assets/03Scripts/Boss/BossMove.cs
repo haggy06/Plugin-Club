@@ -103,7 +103,7 @@ public class BossMove : MonoBehaviour
         // 빠르게 이동하며 아래로 알 투하-> 알 부화 후 발사체 발사
         for (int i = 0; i < 1 ; i++)
         {
-            Audio.instance.PlaySfx(Audio.Sfx.ATK1);
+            // 알 생성 
             GameObject bullet = Instantiate(Egg);
             bullet.transform.position = parent.position;
         }

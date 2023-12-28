@@ -51,7 +51,7 @@ public class Egg_Remake : EnemyBase
     {
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         GetComponent<Collider2D>().isTrigger = true;
-
+        Audio.instance.PlaySfx(Audio.Sfx.Crack);
         isAwake = true;
         StartCoroutine(Movement());
     }

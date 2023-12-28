@@ -92,6 +92,7 @@ public class BossMove_Remake : MonoBehaviour
         for (i = 0; i < featherCount; i++)    // TIP
         {
             bullet = Instantiate(feather, transform.position, Quaternion.Euler(0, 0, 0));
+            Audio.instance.PlaySfx(Audio.Sfx.ATK1);
         }
 
         Invoke("Think", Random.Range(3f, 4f));
@@ -103,6 +104,7 @@ public class BossMove_Remake : MonoBehaviour
         for (i = 0; i < eggCount; i++)
         {
             GameObject bullet = Instantiate(egg, transform.position, Quaternion.Euler(0, 0, 0));
+            Audio.instance.PlaySfx(Audio.Sfx.ATK1);
         }
 
         Invoke("Think", Random.Range(3f, 4f));
@@ -114,6 +116,7 @@ public class BossMove_Remake : MonoBehaviour
         for (i = 0; i < trackingFeatherCount; i++)
         {
             GameObject bullet = Instantiate(trackingFeather, transform.position, Quaternion.Euler(0, 0, 0));
+            Audio.instance.PlaySfx(Audio.Sfx.ATK1);
         }
 
         Invoke("Think", Random.Range(3f, 4f));
