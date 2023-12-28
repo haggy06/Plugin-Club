@@ -30,7 +30,7 @@ public class Egg : MonoBehaviour
         //speed = 10;
         //HP = 5;
         Invoke("Hatch", 3);
-
+    
         //feath = Resources.Load<Sprite>("Feather_3");
     }
 

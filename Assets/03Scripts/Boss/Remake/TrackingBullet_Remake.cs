@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class TrackingBullet_Remake : MonoBehaviour
 {
-     Transform target;
-
-    [SerializeField]
-    private float speed;
+    private Transform target;
+    
+    public float speed = 10f;
+    public float autoDestroyTime = 3f;
 
     private void Awake()
     {
@@ -23,8 +23,10 @@ public class TrackingBullet_Remake : MonoBehaviour
     {
         dircV = (target.position - transform.position).normalized;
         transform.position += dircV * speed * Time.fixedDeltaTime;
-        transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(dircV.x, dircV.y) * Mathf.Rad2Deg - 90, Vector3.forward);
+        //transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(dircV.x, dircV.y) * Mathf.Rad2Deg - 90, Vector3.forward);
 
+        float angle = Mathf.Atan2(dircV.y, dircV.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
         /*
         Vector2 dircV = target.transform.position - this.transform.position;
         Vector2 NextV = dircV.normalized * speed * Time.fixedDeltaTime;
@@ -46,7 +48,7 @@ public class TrackingBullet_Remake : MonoBehaviour
 
     private IEnumerator AutoDestroy()
     {
-        yield return YieldInstructionCache.WaitForSeconds(3f);
+        yield return YieldInstructionCache.WaitForSeconds(autoDestroyTime);
 
         if (gameObject != null)
         {

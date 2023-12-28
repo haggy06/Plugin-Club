@@ -4385,6 +4385,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1373827318682694818, guid: 26b27f9b22700a74ba1c8e55a5ca7d5c, type: 3}
+      propertyPath: toMoveSceneName
+      value: BossScene
+      objectReference: {fileID: 0}
     - target: {fileID: 1373827318682694841, guid: 26b27f9b22700a74ba1c8e55a5ca7d5c, type: 3}
       propertyPath: m_Name
       value: Portal

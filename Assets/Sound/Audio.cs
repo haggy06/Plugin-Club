@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Audio : Singleton<Audio>
 {
+<<<<<<< Updated upstream
     public static Audio instance;
 
+=======
+>>>>>>> Stashed changes
     [Header("#BGM")]
     public AudioClip bgmClip;
     public float bgmVolume;
@@ -23,9 +26,12 @@ public class Audio : Singleton<Audio>
 
     private new void Awake()
     {
+<<<<<<< Updated upstream
         base.Awake();
 
         instance = this;
+=======
+>>>>>>> Stashed changes
         Init();
     }
     void Init()

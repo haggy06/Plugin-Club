@@ -91,7 +91,7 @@ public class BossMove_Remake : MonoBehaviour
         //깃털 발사
         for (i = 0; i < featherCount; i++)    // TIP
         {
-            bullet = Instantiate(feather, transform.position, Quaternion.Euler(0, 0, 0));
+            bullet = Instantiate(feather, transform.position, Quaternion.identity);
         }
 
         Invoke("Think", Random.Range(3f, 4f));
@@ -102,7 +102,7 @@ public class BossMove_Remake : MonoBehaviour
         // 빠르게 이동하며 아래로 알 투하-> 알 부화 후 발사체 발사
         for (i = 0; i < eggCount; i++)
         {
-            GameObject bullet = Instantiate(egg, transform.position, Quaternion.Euler(0, 0, 0));
+            GameObject bullet = Instantiate(egg, transform.position, Quaternion.identity);
         }
 
         Invoke("Think", Random.Range(3f, 4f));
@@ -113,7 +113,7 @@ public class BossMove_Remake : MonoBehaviour
         //유도탄
         for (i = 0; i < trackingFeatherCount; i++)
         {
-            GameObject bullet = Instantiate(trackingFeather, transform.position, Quaternion.Euler(0, 0, 0));
+            GameObject bullet = Instantiate(trackingFeather, transform.position, Quaternion.identity);
         }
 
         Invoke("Think", Random.Range(3f, 4f));
