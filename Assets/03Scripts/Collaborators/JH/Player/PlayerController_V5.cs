@@ -135,17 +135,6 @@ public class PlayerController_V5 : MonoBehaviour
                     movement.Swim();
                 }
             }
-            else if (Input.GetKeyUp(KeyCode.Z))
-            {
-                if (isJump && rigid2D.velocity.y > movement.JumpCanclePower)
-                {
-                    movement.JumpCancle();
-
-                    jumpReady = false;
-
-                    isJump = false;
-                }
-            }
 
             if (Input.GetKeyDown(KeyCode.X) && coolDowned)
             {
@@ -153,6 +142,18 @@ public class PlayerController_V5 : MonoBehaviour
 
                 coolDowned = false;
                 Invoke("CoolDown", fireCoolTime);
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.Z))
+        {
+            if (isJump && rigid2D.velocity.y > movement.JumpCanclePower)
+            {
+                movement.JumpCancle();
+
+                jumpReady = false;
+
+                isJump = false;
             }
         }
 
