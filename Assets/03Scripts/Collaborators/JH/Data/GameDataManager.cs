@@ -7,11 +7,6 @@ public class GameDataManager : Singleton<GameDataManager>
     [SerializeField]
     private GameData gameData;
     public GameData DATA => gameData;
-
-    private void Awake()
-    {
-        base.Singletoning();
-    }
 }
 
 [System.Serializable]

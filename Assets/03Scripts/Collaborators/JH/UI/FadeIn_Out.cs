@@ -23,9 +23,9 @@ public class FadeIn_Out : Singleton<FadeIn_Out>
         fadeImage.color = Color.clear;
     }
     
-    private void Awake()
+    private new void Awake()
     {
-        base.Singletoning();
+        base.Awake();
         StartCoroutine("FadeOut");
         Audio.instance.PlayBgm(true);
     }

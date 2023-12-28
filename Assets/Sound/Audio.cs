@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Audio : MonoBehaviour
+public class Audio : Singleton<Audio>
 {
     public static Audio instance;
 
@@ -21,8 +21,10 @@ public class Audio : MonoBehaviour
     //효과음 목록
     public enum Sfx {Start,b,c,d}
 
-    void Awake()
+    private new void Awake()
     {
+        base.Awake();
+
         instance = this;
         Init();
     }
