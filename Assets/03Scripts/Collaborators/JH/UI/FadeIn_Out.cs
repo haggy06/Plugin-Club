@@ -25,9 +25,9 @@ public class FadeIn_Out : Singleton<FadeIn_Out>
     
     private void Awake()
     {
-        Audio.instanse.PlayBgm(true);
         base.Singletoning();
         StartCoroutine("FadeOut");
+        Audio.instance.PlayBgm(true);
     }
     private void OnLevelWasLoaded(int level)
     {
@@ -45,7 +45,7 @@ public class FadeIn_Out : Singleton<FadeIn_Out>
     {
         Debug.Log("Fadeout");
         alpha = fadeImage.color;
-
+        
         currentTime = 0f;
         percent = 0f;
 
@@ -66,7 +66,7 @@ public class FadeIn_Out : Singleton<FadeIn_Out>
     {
         Debug.Log("Fadein");
         alpha = fadeImage.color;
-
+        
         currentTime = 0f;
         percent = 0f;
 

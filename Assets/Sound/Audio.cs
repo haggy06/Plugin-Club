@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Audio : MonoBehaviour
 {
-    public static Audio instanse;
+    public static Audio instance;
 
     [Header("#BGM")]
     public AudioClip bgmClip;
@@ -18,12 +18,12 @@ public class Audio : MonoBehaviour
     AudioSource[] sfxPlayers;
     int channelIndex;
 
-    //효과음 배열 후 괄호 내 입력
+    //효과음 목록
     public enum Sfx {Start,b,c,d}
 
     void Awake()
     {
-        instanse = this;
+        instance = this;
         Init();
     }
     void Init()
