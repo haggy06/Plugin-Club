@@ -25,6 +25,7 @@ public class FadeIn_Out : Singleton<FadeIn_Out>
     
     private void Awake()
     {
+        Audio.instanse.PlayBgm(true);
         base.Singletoning();
         StartCoroutine("FadeOut");
     }
