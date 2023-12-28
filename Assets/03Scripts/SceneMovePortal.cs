@@ -12,7 +12,7 @@ public class SceneMovePortal : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             StartCoroutine(FadeIn_Out.Inst.FadeIn(toMoveSceneName));
-            Audio.instance.PlaySfx(Audio.Sfx.Portal);
+            Audio.Inst.PlaySfx(Audio.Sfx.Portal);
 
             collision.GetComponent<PlayerController_V5>().EnterPortal();
         }

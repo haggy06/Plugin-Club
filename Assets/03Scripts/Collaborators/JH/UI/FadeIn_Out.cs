@@ -21,7 +21,7 @@ public class FadeIn_Out : Singleton<FadeIn_Out>
     public void FadeImgHide()
     {
         fadeImage.color = Color.clear;
-        Audio.instance.PlayBgm(true);
+        Audio.Inst.PlayBgm(true);
     }
     
     private new void Awake()

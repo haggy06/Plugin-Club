@@ -12,7 +12,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private float playerCurHP = 0f;
     [Space(5), SerializeField]
-    private float playerCurScore;
+    private float playerCurScore = 0f;
     public float PlayerScore => playerCurScore;
 
     private string gameResult = "None";
@@ -23,6 +23,13 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
 
         playerCurHP = playerMaxHP;
+    }
+
+    public void StatReset()
+    {
+        playerCurHP = playerMaxHP;
+
+        playerCurScore = 0f;
     }
 
     private Image hpBar;
@@ -77,9 +84,20 @@ public class GameManager : Singleton<GameManager>
 
     public void Kill_Boss()
     {
-        gameResult = "Game Clear";
+        if (playerCurHP >= playerMaxHP)
+        {
+            gameResult = "Perfect!!!";
+            playerCurScore += 150f;
+            scoreText.text = playerCurScore.ToString();
+        }
+        else
+        {
+            gameResult = "Game Clear";
+        }
 
         gameEndPopup.SetActive(true);
+
+        GameObject.FindWithTag("Player").GetComponent<PlayerController_V5>().Clear();
     }
 
     public void GetScored(float score)

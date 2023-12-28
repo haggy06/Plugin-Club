@@ -17,6 +17,7 @@ public class PlayerHitCheck : MonoBehaviour
         if (!invincible && collision.CompareTag("Enemy"))
         {
             GameManager.Inst.GetDamaged(collision.GetComponent<EnemyBase>().Damage);
+            Audio.Inst.PlaySfx(Audio.Sfx.Crack);
 
             StartCoroutine("Hit_CoolTime");
         }

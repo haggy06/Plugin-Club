@@ -60,7 +60,6 @@ public class BossMove_Remake : EnemyBase
     void Ready()
     {
         animator.SetBool("Emergence", true);
-        transform.position += Vector3.up * 2f;
 
         Invoke("Think", 1);
     }

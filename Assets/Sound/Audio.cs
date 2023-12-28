@@ -4,27 +4,40 @@ using UnityEngine;
 
 public class Audio : Singleton<Audio>
 {
-    public static Audio instance;
     [Header("#BGM")]
     public AudioClip bgmClip;
-    public float bgmVolume;
+    public float bgmVolume = 0.2f;
     AudioSource bgmPlayer;
 
     [Header("#SFX")]
-    public AudioClip[] sfxClips;
-    public float sfxVolume;
-    public int channels;
+    public AudioClip[] sfxClips = new AudioClip[20];
+    public float sfxVolume = 0.5f;
+    public int channels = 8;
     AudioSource[] sfxPlayers;
     int channelIndex;
 
     //효과음 목록
-    public enum Sfx {Start,Jump1,Shoot1,Walk_G, ATK1, Crack, Portal}
+    public enum Sfx {Start,Jump1,Shoot1, W_Ground, ATK1, Crack, Portal}
 
+
+    public void InputAudioClip(Sfx sfx)
+    {
+        sfxClips[(int)sfx] = Resources.Load<AudioClip>(sfx.ToString());
+    }
     private new void Awake()
     {
         base.Awake();
 
-        instance = this;
+        bgmClip = Resources.Load<AudioClip>("Title");
+
+        InputAudioClip(Sfx.Start);
+        InputAudioClip(Sfx.Jump1);
+        InputAudioClip(Sfx.Shoot1);
+        InputAudioClip(Sfx.W_Ground);
+        InputAudioClip(Sfx.ATK1);
+        InputAudioClip(Sfx.Crack);
+        InputAudioClip(Sfx.Portal);
+
         Init();
     }
     void Init()

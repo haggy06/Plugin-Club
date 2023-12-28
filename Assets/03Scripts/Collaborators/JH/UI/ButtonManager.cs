@@ -12,6 +12,6 @@ public class ButtonManager : MonoBehaviour
 
         StartCoroutine(FadeIn_Out.Inst.FadeIn(sceneName));
         FadeIn_Out.Inst.FadeTime = 1f;
-        Audio.instance.PlaySfx(Audio.Sfx.Start);
+        Audio.Inst.PlaySfx(Audio.Sfx.Start);
     }
 }

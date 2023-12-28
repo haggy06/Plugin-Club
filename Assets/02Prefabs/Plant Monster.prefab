@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b546bc7476b555b41bdf0d97e8b004b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 10
+  score: 12
   hp: 30
   damage: 1
   distance: 15
@@ -113,6 +113,7 @@ MonoBehaviour:
   bullet: {fileID: 7874331763825251798, guid: 68c0964a37697664b91565463b044557, type: 3}
   spitPos: {fileID: 6946762981677558374}
   cooltime: 1.5
+  plantDir: -1
 --- !u!61 &6946762980661316393
 BoxCollider2D:
   m_ObjectHideFlags: 0

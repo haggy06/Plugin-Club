@@ -113,7 +113,7 @@ public class PlayerController_V5 : MonoBehaviour
                 if (checker.IsGrounded)
                 {
                     jumpReady = true;
-                    Audio.instance.PlaySfx(Audio.Sfx.Jump1);
+                    Audio.Inst.PlaySfx(Audio.Sfx.Jump1);
                     StartCoroutine("Jumping");
                 }
                 else if (movement.WaterJump)
@@ -125,7 +125,7 @@ public class PlayerController_V5 : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.X))
             {
                 anim.SetTrigger("Attack");
-                Audio.instance.PlaySfx(Audio.Sfx.Shoot1);
+                Audio.Inst.PlaySfx(Audio.Sfx.Shoot1);
             }
         }
 
@@ -186,12 +186,19 @@ public class PlayerController_V5 : MonoBehaviour
     public void PlayerDead()
     {
         Debug.Log("플레이어 사망");
-
+        movement.StopAllCoroutines();
         StopAllCoroutines();
+
+        rigid2D.velocity = Vector2.zero;
 
         sprite.color = Color.red;
         transform.Rotate(new Vector3(0f, 0f, 90f));
-        GetComponent<PlayerHitCheck>().enabled = false;
+        Destroy(GetComponent<PlayerHitCheck>());
         enabled = false;
+    }
+
+    public void Clear()
+    {
+        gameObject.layer = 8;
     }
 }
