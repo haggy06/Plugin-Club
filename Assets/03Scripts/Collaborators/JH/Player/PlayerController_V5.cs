@@ -62,23 +62,29 @@ public class PlayerController_V5 : MonoBehaviour
     [SerializeField, Range(-1f, 1f)] private float lastMoveDirection = 0f;
      */
     private float moveDirection = 0f;
+    private float lastMoveDirection = 5f;
     private void FixedUpdate()
     {
         if (canMove)
         {
             moveDirection = Input.GetAxisRaw("Horizontal");
 
-            if (moveDirection == -1)
+            if (!Mathf.Approximately(lastMoveDirection, moveDirection))
             {
-                movement.LeftMove();
-            }
-            else if (moveDirection == 1)
-            {
-                movement.RightMove();
-            }
-            else
-            {
-                movement.Break();
+                if (Mathf.Approximately(moveDirection, -1f))
+                {
+                    movement.LeftMove();
+                }
+                else if (Mathf.Approximately(moveDirection, 1f))
+                {
+                    movement.RightMove();
+                }
+                else
+                {
+                    movement.Break();
+                }
+
+                lastMoveDirection = moveDirection;
             }
         }
         /*
@@ -97,6 +103,14 @@ public class PlayerController_V5 : MonoBehaviour
 
         playerMove.Xmove(moveDirection);
         */
+    }
+
+    public void EnterPortal()
+    {
+        movement.Break();
+        lastMoveDirection = 0f;
+
+        canMove = false;
     }
 
     private void Update()
@@ -167,7 +181,9 @@ public class PlayerController_V5 : MonoBehaviour
     {
         Debug.Log("발사 준비");
         movement.Break();
-        rigid2D.velocity = new Vector2(rigid2D.velocity.x / 2f, rigid2D.velocity.y);
+        lastMoveDirection = 0f;
+
+        //rigid2D.velocity = new Vector2(rigid2D.velocity.x / 2f, rigid2D.velocity.y);
 
         canMove = false;
     }
