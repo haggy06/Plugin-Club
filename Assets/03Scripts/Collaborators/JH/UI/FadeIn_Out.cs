@@ -11,12 +11,17 @@ public class FadeIn_Out : Singleton<FadeIn_Out>
     private float fadeIn_OutTime = 1f;
     public float FadeTime
     {
-        set => value = fadeIn_OutTime;
+        set => fadeIn_OutTime = value;
         get => fadeIn_OutTime;
     }
 
     [SerializeField]
     private Image fadeImage;
+
+    public void FadeImgHide()
+    {
+        fadeImage.color = Color.clear;
+    }
     
     private void Awake()
     {
@@ -28,6 +33,7 @@ public class FadeIn_Out : Singleton<FadeIn_Out>
         Debug.Log(level);
         if (level != (int)SceneName.LoadingScene)
         {
+            fadeImage.color = Color.black;
             StartCoroutine("FadeOut");
         }
     }

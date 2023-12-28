@@ -7,6 +7,8 @@ public class LoadingSceneManager : MonoBehaviour
     private void Awake()
     {
         Debug.Log("·Îµù ¾À ÁøÀÔ");
+
+        FadeIn_Out.Inst.FadeImgHide();
         StartCoroutine("LoadSceneAsync");
         //Invoke("LoadNextScene", 1f);
     }
@@ -18,12 +20,7 @@ public class LoadingSceneManager : MonoBehaviour
         AsyncOperation asyncScene = SceneManager.LoadSceneAsync(PlayerPrefs.GetString(TempData.LoadSceneName.ToString()));
         asyncScene.allowSceneActivation = false;
 
-        yield return YieldInstructionCache.WaitForSeconds(1f);
+        yield return YieldInstructionCache.WaitForSeconds(1.5f);
         asyncScene.allowSceneActivation = true;
-    }
-
-    private void LoadNextScene()
-    {
-        SceneManager.LoadScene(PlayerPrefs.GetString(TempData.LoadSceneName.ToString()));
     }
 }
