@@ -252,58 +252,92 @@ public class RigidMovement : MonoBehaviour
     #region Move Script
     private Vector2 xMoveVec;
     private float fixedCycle = 0.02f; // 기본적으로 FixedUpdate는 0.02초에 한 번 실행됨
+    private WaitForFixedUpdate wfs = new WaitForFixedUpdate();
+
     public void LeftMove()
     {
-        transform.parent.rotation = Quaternion.Euler(0f, 180f, 0f);
-        isMove = true;
-
-        if (rigid2D.velocity.x >= -moveSpeed * (moveSpeedRatio / 100))
-        {
-            xMoveVec.x = Mathf.Clamp(rigid2D.velocity.x - (moveSpeed / boostLeadTime * fixedCycle), -moveSpeed * (moveSpeedRatio / 100), float.PositiveInfinity);
-        }
-        else
-        {
-            xMoveVec.x = rigid2D.velocity.x + (moveSpeed / boostLeadTime * fixedCycle / 2f);
-        }
-        xMoveVec.y = rigid2D.velocity.y;
-
-        rigid2D.velocity = xMoveVec;
+        StopAllCoroutines();
+        StartCoroutine("LeftMoveCor");
     }
+    private IEnumerator LeftMoveCor()
+    {
+        while(true)
+        {
+            transform.parent.rotation = Quaternion.Euler(0f, 180f, 0f);
+            isMove = true;
+
+            if (rigid2D.velocity.x >= -moveSpeed * (moveSpeedRatio / 100))
+            {
+                xMoveVec.x = Mathf.Clamp(rigid2D.velocity.x - (moveSpeed / boostLeadTime * fixedCycle), -moveSpeed * (moveSpeedRatio / 100), float.PositiveInfinity);
+            }
+            else
+            {
+                xMoveVec.x = rigid2D.velocity.x + (moveSpeed / boostLeadTime * fixedCycle / 2f);
+            }
+            xMoveVec.y = rigid2D.velocity.y;
+
+            rigid2D.velocity = xMoveVec;
+
+            yield return wfs;
+        }
+    }
+
     public void RightMove()
+    {
+        StopAllCoroutines();
+        StartCoroutine("RightMoveCor");
+    }
+    private IEnumerator RightMoveCor()
     {
         transform.parent.rotation = Quaternion.Euler(0f, 0f, 0f);
         isMove = true;
 
-        if (rigid2D.velocity.x <= moveSpeed * (moveSpeedRatio / 100))
+        while (true)
         {
-            xMoveVec.x = Mathf.Clamp(rigid2D.velocity.x + (moveSpeed / boostLeadTime * fixedCycle), float.NegativeInfinity, moveSpeed * (moveSpeedRatio / 100));
-        }
-        else
-        {
-            xMoveVec.x = rigid2D.velocity.x - (moveSpeed / boostLeadTime * fixedCycle / 2f);
-        }
-        xMoveVec.y = rigid2D.velocity.y;
+            if (rigid2D.velocity.x <= moveSpeed * (moveSpeedRatio / 100))
+            {
+                xMoveVec.x = Mathf.Clamp(rigid2D.velocity.x + (moveSpeed / boostLeadTime * fixedCycle), float.NegativeInfinity, moveSpeed * (moveSpeedRatio / 100));
+            }
+            else
+            {
+                xMoveVec.x = rigid2D.velocity.x - (moveSpeed / boostLeadTime * fixedCycle / 2f);
+            }
+            xMoveVec.y = rigid2D.velocity.y;
 
-        rigid2D.velocity = xMoveVec;
+            rigid2D.velocity = xMoveVec;
+
+            yield return wfs;
+        }
     }
+
     public void Break()
+    {
+        StopAllCoroutines();
+        StartCoroutine("BreakCor");
+    }
+    private IEnumerator BreakCor()
     {
         isMove = false;
         anim.SetBool("IsWalk", false);
 
-        if (Mathf.Abs(rigid2D.velocity.x) <= 0.5f)
+        while (true)
         {
-            xMoveVec.x = 0f;
-            xMoveVec.y = rigid2D.velocity.y;
+            if (Mathf.Abs(rigid2D.velocity.x) <= 0.5f)
+            {
+                xMoveVec.x = 0f;
+                xMoveVec.y = rigid2D.velocity.y;
 
-            rigid2D.velocity = xMoveVec;
-        }
-        else
-        {
-            xMoveVec.x = rigid2D.velocity.x + (rigid2D.velocity.x > 0f ? -(moveSpeed * friction * 5f * fixedCycle) : (moveSpeed * friction * 5f * fixedCycle)); // 이동속도가 양수면 저 속도(moveSpeed * friction * 5f * fixedCycle)를 빼주고, 음수면 더해줌
-            xMoveVec.y = rigid2D.velocity.y;
+                rigid2D.velocity = xMoveVec;
+            }
+            else
+            {
+                xMoveVec.x = rigid2D.velocity.x + (rigid2D.velocity.x > 0f ? -(moveSpeed * friction * 5f * fixedCycle) : (moveSpeed * friction * 5f * fixedCycle)); // 이동속도가 양수면 저 속도(moveSpeed * friction * 5f * fixedCycle)를 빼주고, 음수면 더해줌
+                xMoveVec.y = rigid2D.velocity.y;
 
-            rigid2D.velocity = xMoveVec;
+                rigid2D.velocity = xMoveVec;
+            }
+
+            yield return wfs;
         }
     }
 
