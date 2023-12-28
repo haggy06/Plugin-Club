@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 using static UnityEngine.GraphicsBuffer;
 
 public class Egg : MonoBehaviour
@@ -8,9 +10,15 @@ public class Egg : MonoBehaviour
     Rigidbody2D rigid;
     CapsuleCollider2D capsule;
     SpriteRenderer spriteRenderer;
-    public float HP;
+
+    [SerializeField]
+    private GameObject trackingFeather;
+
+    public float HP = 5f;
     Transform target;
-    public float speed;
+    public float speed = 10f;
+    public Sprite feath;
+    Image p_image;
     bool a;
 
     void Awake()
@@ -18,10 +26,12 @@ public class Egg : MonoBehaviour
         capsule = GetComponent<CapsuleCollider2D>();
         rigid = GetComponent<Rigidbody2D>();
         target = GameObject.FindWithTag("Player").transform;
-        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
-        speed = 10;
-        HP = 5;
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        //speed = 10;
+        //HP = 5;
         Invoke("Hatch", 3);
+
+        //feath = Resources.Load<Sprite>("Feather_3");
     }
 
     void FixedUpdate()
@@ -34,9 +44,9 @@ public class Egg : MonoBehaviour
             transform.position += direction * speed * Time.deltaTime;
 
             float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+            transform.rotation = Quaternion.AngleAxis(angle - 270, Vector3.forward);
         }
-        
+
     }
 
     IEnumerator Movement()
@@ -46,10 +56,16 @@ public class Egg : MonoBehaviour
     }
     void Hatch()
     {
-        
+        rigid.gravityScale = 0;
+
+        Instantiate(trackingFeather, new Vector2(transform.position.x, transform.position.y + 1.5f), Quaternion.identity);
+        Destroy(gameObject);
+        /*
+        spriteRenderer.sprite = feath;
         a = true;
         StartCoroutine(Movement());
-        
+         * */
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
